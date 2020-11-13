@@ -1,0 +1,63 @@
+<div class="container">
+<div class="row mt-40">
+  <button type="button" class="btn-primary" (click)="createForm()">Add Address</button>
+ 
+</div>
+  <div class="row"  *ngFor="let data of addressList;index as i;" style="margin-top: 9px;
+  ">
+
+
+<form #formRef="ngForm">
+<div class="row">
+  <div class="col-md-6">
+    <span>Address {{i+1}}</span>
+  
+  </div>
+<div class="col-md-6">
+  <button type="submit" (click)="rremoveForm(i)" class="saveButton btn btn-danger">Remove</button>
+
+</div>
+</div>   
+<div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Address</label>
+      <input type="text" class="form-control" name="address" [(ngModel)]="data.address" id="inputAddress" placeholder="Address" #address="ngModel" required>
+      <div [hidden]="address.valid || address.pristine"
+     class="alert alert-danger">
+  Address is required
+</div>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Street</label>
+      <input type="text" class="form-control" name="street" [(ngModel)]="data.street" id="inputPassword4" placeholder="Street" #street="ngModel" required>
+      <div [hidden]="street.valid || street.pristine "
+      class="alert alert-danger">
+   street is required
+ </div>
+    </div>
+  </div>
+<div class="form-row">
+  <div class="form-group col-md-6">
+    <label for="inputAddress">City</label>
+    <input type="text" class="form-control" name="city" [(ngModel)]="data.city" id="inputCity" placeholder="City" #city="ngModel" required>  
+    <div [hidden]="city.valid || city.pristine"
+    class="alert alert-danger">
+ city is required
+</div>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="inputAddress2">Country</label>
+    <select [(ngModel)]="data.country" name="country" class="form-control" id="exampleFormControlSelect1" #country="ngModel" required>
+      <option   *ngFor="let name of countryList;">{{name}}</option>
+     </select>
+     <!-- <div [hidden]="country.valid || country.pristine"
+     class="alert alert-danger">
+  country is required
+ </div> -->
+      </div>
+</div>
+
+  <button [disabled]="!formRef.valid" *ngIf="i===addressList.length-1" type="button" (click)="saveForm()" class="saveButton btn btn-success">Submit</button>
+</form>
+  </div>
+</div>
